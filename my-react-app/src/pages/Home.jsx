@@ -28,6 +28,16 @@ function Home() {
 
 		setDataFiltrada(filtrados);
 	};
+	const filtrarMass = () => {
+		let ordenMass = [];
+		ordenMass = data.filter((astro) => astro.mass?.massValue).sort((a, b) => b.mass?.massValue - a.mass?.massValue);
+		setDataFiltrada(ordenMass);
+	};
+	const mostrarRandom = () => {
+		const randomIndex = Math.floor(Math.random() * data.length);
+		const astroRandom = data[randomIndex];
+		setDataFiltrada([astroRandom]);
+	};
 
 	return (
 		<div className='continer'>
@@ -53,6 +63,13 @@ function Home() {
 			<Button variant='contained' onClick={() => filtrarPorTipo('Comet')}>
 				Cometas
 			</Button>
+			<Button variant='contained' onClick={filtrarMass}>
+				filtrar por masa
+			</Button>
+			<Button variant='contained' onClick={mostrarRandom}>
+				Random Astro
+			</Button>
+
 			{loading ? <p>...loading</p> : <CardList data={dataFiltrada}></CardList>}
 		</div>
 	);
